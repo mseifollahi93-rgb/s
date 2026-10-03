@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>فروشگاه من</title>
+
+
+<style>
+
+body {
+
+    margin: 0;
+
+    font-family: Tahoma, Arial;
+
+    background: #f4f4f4;
+
+    color: #222;
+}
+
+
+header {
+
+    background: #222;
+
+    color: white;
+
+    padding: 20px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+
+button {
+
+    cursor: pointer;
+}
+
+
+.cart-button {
+
+    background: white;
+
+    border: none;
+
+    padding: 10px 20px;
+
+    border-radius: 8px;
+
+    font-size: 16px;
+}
+
+
+.hero {
+
+    text-align: center;
+
+    padding: 50px;
+
+    background: #ddd;
+}
+
+
+.products {
+
+    display: flex;
+
+    gap: 25px;
+
+    justify-content: center;
+
+    padding: 40px;
+
+    flex-wrap: wrap;
+}
+
+
+.product {
+
+    background: white;
+
+    width: 260px;
+
+    padding: 20px;
+
+    text-align: center;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 3px 10px
+        rgba(0,0,0,0.1);
+}
+
+
+.product img {
+
+    width: 100%;
+
+    height: 180px;
+
+    object-fit: cover;
+
+    border-radius: 10px;
+}
+
+
+.price {
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    margin: 15px;
+}
+
+
+.add-button {
+
+    background: #222;
+
+    color: white;
+
+    border: none;
+
+    padding: 12px 20px;
+
+    border-radius: 8px;
+}
+
+
+/* سبد خرید */
+
+.cart {
+
+    position: fixed;
+
+    top: 0;
+
+    right: -400px;
+
+    width: 350px;
+
+    max-width: 90%;
+
+    height: 100%;
+
+    background: white;
+
+    padding: 25px;
+
+    box-shadow:
+        -5px 0 20px
+        rgba(0,0,0,.2);
+
+    transition: .3s;
+
+    overflow-y: auto;
+
+    z-index: 100;
+}
+
+
+.cart.open {
+
+    right: 0;
+}
+
+
+.cart-item {
+
+    border-bottom:
+        1px solid #ddd;
+
+    padding: 15px 0;
+}
+
+
+.cart-header {
+
+    display: flex;
+
+    justify-content: space-between;
+}
+
+
+.close {
+
+    font-size: 25px;
+
+    cursor: pointer;
+}
+
+
+.checkout {
+
+    width: 100%;
+
+    background: green;
+
+    color: white;
+
+    border: none;
+
+    padding: 15px;
+
+    border-radius: 8px;
+
+    font-size: 18px;
+}
+
+
+/* صفحه سفارش */
+
+#checkoutPage {
+
+    display: none;
+
+    max-width: 650px;
+
+    margin: 40px auto;
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 15px;
+}
+
+
+#checkoutPage input,
+#checkoutPage textarea {
+
+    width: 100%;
+
+    padding: 12px;
+
+    margin: 8px 0 15px;
+
+    box-sizing: border-box;
+
+    border:
+        1px solid #ccc;
+
+    border-radius: 8px;
+
+    font-size: 16px;
+}
+
+
+.pay {
+
+    width: 100%;
+
+    background: #0066cc;
+
+    color: white;
+
+    border: none;
+
+    padding: 15px;
+
+    border-radius: 8px;
+
+    font-size: 18px;
+}
+
+
+.back {
+
+    background: #ddd;
+
+    border: none;
+
+    padding: 10px 20px;
+
+    border-radius: 8px;
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- فروشگاه -->
+
+<div id="shopPage">
+
+
+<header>
+
+<h2>
+فروشگاه من 🛍️
+</h2>
+
+
+<button
+class="cart-button"
+onclick="openCart()">
+
+🛒 سبد خرید
+(
+<span id="cartCount">0</span>
+)
+
+</button>
+
+</header>
+
+
+<div class="hero">
+
+<h1>
+خوش آمدید 🌷
+</h1>
+
+<p>
+محصولات باکیفیت با قیمت مناسب
+</p>
+
+</div>
+
+
+<div class="products">
+
+
+<div class="product">
+
+<img src="https://picsum.photos/400/300?random=1">
+
+<h3>
+محصول شماره ۱
+</h3>
+
+<p>
+یک محصول باکیفیت
+</p>
+
+<div class="price">
+500,000 تومان
+</div>
+
+<button
+class="add-button"
+onclick="addToCart(1)">
+
+افزودن به سبد 🛒
+
+</button>
+
+</div>
+
+
+
+<div class="product">
+
+<img src="https://picsum.photos/400/300?random=2">
+
+<h3>
+محصول شماره ۲
+</h3>
+
+<p>
+محصولی زیبا و کاربردی
+</p>
+
+<div class="price">
+750,000 تومان
+</div>
+
+<button
+class="add-button"
+onclick="addToCart(2)">
+
+افزودن به سبد 🛒
+
+</button>
+
+</div>
+
+
+
+<div class="product">
+
+<img src="https://picsum.photos/400/300?random=3">
+
+<h3>
+محصول شماره ۳
+</h3>
+
+<p>
+کیفیت عالی
+</p>
+
+<div class="price">
+900,000 تومان
+</div>
+
+<button
+class="add-button"
+onclick="addToCart(3)">
+
+افزودن به سبد 🛒
+
+</button>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<!-- سبد خرید -->
+
+<div
+id="cart"
+class="cart">
+
+
+<div class="cart-header">
+
+<h2>
+🛒 سبد خرید
+</h2>
+
+<span
+class="close"
+onclick="closeCart()">
+
+×
+</span>
+
+</div>
+
+
+<div id="cartItems"></div>
+
+
+<h3>
+
+مجموع:
+
+<span id="cartTotal">
+0
+</span>
+
+تومان
+
+</h3>
+
+
+<button
+class="checkout"
+onclick="goToCheckout()">
+
+💳 ادامه و پرداخت
+
+</button>
+
+
+</div>
+
+
+<!-- صفحه ثبت سفارش -->
+
+<div
+id="checkoutPage">
+
+
+<button
+class="back"
+onclick="backToShop()">
+
+← بازگشت
+
+</button>
+
+
+<h1>
+🧾 ثبت سفارش
+</h1>
+
+
+<label>
+نام و نام خانوادگی
+</label>
+
+<input
+id="name"
+placeholder="نام شما">
+
+
+<label>
+شماره موبایل
+</label>
+
+<input
+id="phone"
+placeholder="09xxxxxxxxx">
+
+
+<label>
+آدرس
+</label>
+
+<textarea
+id="address"
+rows="4"
+placeholder="آدرس کامل"></textarea>
+
+
+<h3>
+خلاصه سفارش
+</h3>
+
+
+<div id="checkoutItems"></div>
+
+
+<h2>
+
+مبلغ:
+
+<span id="checkoutTotal">
+0
+</span>
+
+تومان
+
+</h2>
+
+
+<button
+class="pay"
+onclick="pay()">
+
+💳 پرداخت آنلاین
+
+</button>
+
+
+</div>
+
+
+<script>
+
+
+let cart = [];
+
+
+const products = {
+
+1: {
+name: "محصول شماره ۱",
+price: 500000
+},
+
+2: {
+name: "محصول شماره ۲",
+price: 750000
+},
+
+3: {
+name: "محصول شماره ۳",
+price: 900000
+}
+
+};
+
+
+
+function addToCart(id) {
+
+
+let item =
+cart.find(
+x => x.id === id
+);
+
+
+if (item) {
+
+item.quantity++;
+
+}
+
+else {
+
+cart.push({
+
+id: id,
+
+name: products[id].name,
+
+price: products[id].price,
+
+quantity: 1
+
+});
+
+}
+
+
+updateCart();
+
+
+alert(
+"محصول به سبد خرید اضافه شد 🛒"
+);
+
+}
+
+
+
+function updateCart() {
+
+
+let box =
+document.getElementById(
+"cartItems"
+);
+
+
+box.innerHTML = "";
+
+
+let total = 0;
+
+let count = 0;
+
+
+cart.forEach(item => {
+
+
+let subtotal =
+item.price *
+item.quantity;
+
+
+total += subtotal;
+
+count += item.quantity;
+
+
+box.innerHTML += `
+
+<div class="cart-item">
+
+<strong>
+${item.name}
+</strong>
+
+<br><br>
+
+قیمت:
+${item.price.toLocaleString()}
+تومان
+
+<br><br>
+
+تعداد:
+
+<button
+onclick="changeQuantity(${item.id},-1)">
+−
+</button>
+
+${item.quantity}
+
+<button
+onclick="changeQuantity(${item.id},1)">
++
+</button>
+
+<br><br>
+
+<button
+onclick="removeItem(${item.id})">
+
+🗑️ حذف
+
+</button>
+
+</div>
+
+`;
+
+});
+
+
+document.getElementById(
+"cartCount"
+).innerText = count;
+
+
+document.getElementById(
+"cartTotal"
+).innerText =
+total.toLocaleString();
+
+}
+
+
+
+function changeQuantity(
+id,
+change
+) {
+
+
+let item =
+cart.find(
+x => x.id === id
+);
+
+
+if (!item)
+return;
+
+
+item.quantity += change;
+
+
+if (item.quantity <= 0) {
+
+removeItem(id);
+
+return;
+
+}
+
+
+updateCart();
+
+}
+
+
+
+function removeItem(id) {
+
+
+cart =
+cart.filter(
+x => x.id !== id
+);
+
+
+updateCart();
+
+}
+
+
+
+function openCart() {
+
+document
+.getElementById("cart")
+.classList
+.add("open");
+
+}
+
+
+
+function closeCart() {
+
+document
+.getElementById("cart")
+.classList
+.remove("open");
+
+}
+
+
+
+function goToCheckout() {
+
+
+if (cart.length === 0) {
+
+alert(
+"سبد خرید خالی است."
+);
+
+return;
+
+}
+
+
+closeCart();
+
+
+document.getElementById(
+"shopPage"
+).style.display = "none";
+
+
+document.getElementById(
+"checkoutPage"
+).style.display = "block";
+
+
+showCheckout();
+
+}
+
+
+
+function showCheckout() {
+
+
+let box =
+document.getElementById(
+"checkoutItems"
+);
+
+
+box.innerHTML = "";
+
+
+let total = 0;
+
+
+cart.forEach(item => {
+
+
+let subtotal =
+item.price *
+item.quantity;
+
+
+total += subtotal;
+
+
+box.innerHTML += `
+
+<p>
+
+${item.name}
+
+×
+
+${item.quantity}
+
+=
+
+${subtotal.toLocaleString()}
+
+تومان
+
+</p>
+
+`;
+
+});
+
+
+document.getElementById(
+"checkoutTotal"
+).innerText =
+total.toLocaleString();
+
+}
+
+
+
+function backToShop() {
+
+
+document.getElementById(
+"checkoutPage"
+).style.display = "none";
+
+
+document.getElementById(
+"shopPage"
+).style.display = "block";
+
+}
+
+
+
+async function pay() {
+
+
+let name =
+document.getElementById(
+"name"
+).value.trim();
+
+
+let phone =
+document.getElementById(
+"phone"
+).value.trim();
+
+
+let address =
+document.getElementById(
+"address"
+).value.trim();
+
+
+if (!name) {
+
+alert(
+"نام خود را وارد کنید."
+);
+
+return;
+
+}
+
+
+if (!phone) {
+
+alert(
+"شماره موبایل را وارد کنید."
+);
+
+return;
+
+}
+
+
+if (!address) {
+
+alert(
+"آدرس را وارد کنید."
+);
+
+return;
+
+}
+
+
+
+try {
+
+
+let response =
+await fetch(
+"/api/order",
+{
+
+method: "POST",
+
+headers: {
+
+"Content-Type":
+"application/json"
+
+},
+
+body:
+JSON.stringify({
+
+name: name,
+
+phone: phone,
+
+address: address,
+
+items:
+cart.map(
+item => ({
+
+id: item.id,
+
+quantity:
+item.quantity
+
+})
+)
+
+})
+
+}
+);
+
+
+let result =
+await response.json();
+
+
+if (result.success) {
+
+
+alert(
+
+"سفارش با موفقیت ثبت شد.\n\n" +
+
+"شماره سفارش: " +
+
+result.order_id
+
+);
+
+
+cart = [];
+
+updateCart();
+
+backToShop();
+
+}
+
+else {
+
+alert(
+result.message
+);
+
+}
+
+
+}
+
+catch (error) {
+
+
+console.error(error);
+
+
+alert(
+"سرور در دسترس نیست."
+);
+
+}
+
+}
+
+
+updateCart();
+
+
+</script>
+
+
+</body>
+
+</html>
